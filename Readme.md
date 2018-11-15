@@ -39,3 +39,21 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 Now the config values are validated based on `DataAnnotations` attributes and on rules in `MyConfigurationValidator`
+
+## Api
+#### AddConfig
+```csharp
+public static IServiceCollection AddConfig<TConfig, TValidator>(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    where TConfig : class, new()
+    where TValidator : AbstractValidator<TConfig>
+```
+Adds IOptions\<T> to IoC container, validates config before `Startup.Configure` is called using `DataAnnotations` attributes and `TValidator`
+
+#### GetConfig
+```csharp
+public static TConfig GetConfig<TConfig, TValidator>(this IConfiguration configuration, string sectionName)
+    where TConfig : class, new()
+    where TValidator : AbstractValidator<TConfig>, new()
+```
+Gets config of type `T` from configuration, validates and returns it.
+Use this method when you don't need to add `IOptions` and you want to get validated config inside `ConfigureServices` method and use right away
