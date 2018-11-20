@@ -4,14 +4,14 @@ using Microsoft.Extensions.Options;
 
 namespace Rtl.Configuration.FluentValidation
 {
-    class OptionsValidatationDelegator<TConfig, TValidator> : IOptionsValidator
+    class OptionsValidationDelegator<TConfig, TValidator> : IOptionsValidator
         where TConfig : class, new()
         where TValidator : AbstractValidator<TConfig>
     {
         private readonly TValidator _validator;
         private readonly TConfig _options;
 
-        public OptionsValidatationDelegator(TValidator validator, IOptions<TConfig> options)
+        public OptionsValidationDelegator(TValidator validator, IOptions<TConfig> options)
         {
             _validator = validator;
             _options = options.Value;

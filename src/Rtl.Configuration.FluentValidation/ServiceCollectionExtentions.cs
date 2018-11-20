@@ -14,7 +14,7 @@ namespace Rtl.Configuration.FluentValidation
             services.AddConfig<TConfig>(configuration, sectionName);
 
             services.AddTransient<TValidator>();
-            services.AddTransient<IOptionsValidator, OptionsValidatationDelegator<TConfig, TValidator>>();
+            services.AddTransient<IOptionsValidator, OptionsValidationDelegator<TConfig, TValidator>>();
 
             return services;
         }
