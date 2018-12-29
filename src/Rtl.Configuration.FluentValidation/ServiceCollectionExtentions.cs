@@ -1,7 +1,8 @@
-﻿using Rtl.Configuration.Validation;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Rtl.Configuration.Validation;
+using System.Linq;
 
 namespace Rtl.Configuration.FluentValidation
 {
@@ -11,6 +12,11 @@ namespace Rtl.Configuration.FluentValidation
             where TConfig : class, new()
             where TValidator : AbstractValidator<TConfig>
         {
+            if (!services.Any(x => x.ImplementationType == typeof(OptionsValidationDelegator<TConfig, TValidator>)))
+            {
+                return services;
+            }
+
             services.AddConfig<TConfig>(configuration, sectionName);
 
             services.AddTransient<TValidator>();
