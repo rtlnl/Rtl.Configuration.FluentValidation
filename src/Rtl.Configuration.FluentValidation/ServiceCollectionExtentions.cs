@@ -12,7 +12,7 @@ namespace Rtl.Configuration.FluentValidation
             where TConfig : class, new()
             where TValidator : AbstractValidator<TConfig>
         {
-            if (!services.Any(x => x.ImplementationType == typeof(OptionsValidationDelegator<TConfig, TValidator>)))
+            if (services.Any(x => x.ImplementationType == typeof(OptionsValidationDelegator<TConfig, TValidator>)))
             {
                 return services;
             }
